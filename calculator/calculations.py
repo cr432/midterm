@@ -1,12 +1,10 @@
 # calculations.py
 import pandas as pd
 from typing import List
-import logging
+import csv
 
 from calculator.calculation import Calculation
-
-# Set up logging
-logger = logging.getLogger(__name__)
+from logging_config import logger
 
 class Calculations:
     history: List[Calculation] = []
@@ -54,12 +52,20 @@ class Calculations:
             logger.error(f'Error loading calculation history: {e}')
 
     @classmethod
-    def save_history(cls, file_path: str):
+    def save_history_to_csv(cls, file_path: str):
         """Save calculation history to a CSV file."""
         logger.info(f'Saving calculation history to {file_path}')
         try:
-            df = pd.DataFrame([{'a': calc.a, 'b': calc.b, 'command': calc.command} for calc in cls.history])
-            df.to_csv(file_path, index=False)
-            logger.info(f'Calculation history saved successfully')
+            # Extract history data
+            history_data = [{'a': calc.a, 'b': calc.b, 'command': calc.command.__class__.__name__} for calc in cls.history]
+
+            # Write data to CSV file
+            with open(file_path, 'w', newline='') as csvfile:
+                fieldnames = ['a', 'b', 'command']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(history_data)
+
+            logger.info(f'Calculation history saved to CSV successfully')
         except Exception as e:
-            logger.error(f'Error saving calculation history: {e}')
+            logger.error(f'Error saving calculation history to CSV: {e}')
