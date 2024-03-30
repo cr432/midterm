@@ -1,18 +1,23 @@
 # logging_config.py
+import os
 import logging
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def configure_logging():
     # Create a logger
     logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(os.getenv('LOG_LEVEL', 'INFO'))
 
-    # Create a file handler and set its log level to INFO
-    file_handler = logging.FileHandler('app.log')
-    file_handler.setLevel(logging.INFO)
+    # Create a file handler and set its log level
+    file_handler = logging.FileHandler(os.getenv('LOG_FILE_PATH', 'app.log'))
+    file_handler.setLevel(os.getenv('LOG_LEVEL', 'INFO'))
 
-    # Create a console handler and set its log level to INFO
+    # Create a console handler and set its log level
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
+    console_handler.setLevel(os.getenv('LOG_LEVEL', 'INFO'))
 
     # Define the log format
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
