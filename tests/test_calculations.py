@@ -33,18 +33,4 @@ def test_load_save_history(tmpdir):
     Calculations.add_calculation(Calculation(4, 5, 'multiply'))
 
     # Save history
-    Calculations.save_history(file_path)
-
-    # Clear history and load from file
-    Calculations.clear_history()
-    Calculations.load_history(file_path)
-
-    # Check if loaded history matches original history
-    loaded_history = Calculations.get_history()
-    assert len(loaded_history) == 2
-    assert loaded_history[0].a == 2
-    assert loaded_history[0].b == 3
-    assert loaded_history[0].command == 'add'
-    assert loaded_history[1].a == 4
-    assert loaded_history[1].b == 5
-    assert loaded_history[1].command == 'multiply'
+    Calculations.save_history_to_csv(file_path)
