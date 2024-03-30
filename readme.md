@@ -88,7 +88,7 @@ Dynamic logging configuration is achieved through environment variables, allowin
 
 ## Video Demonstration
 
-A 3-5 minute video demonstration showcasing the calculator's key features and functionalities is available [here](video_link).
+A 3-5 minute video demonstration showcasing the calculator's key features and functionalities is available [here](https://njit.webex.com/webappng/sites/njit/recording/da9eca49d071103c8f3bbad5a2aeacf1/playback).
 
 ## Setup Instructions
 
