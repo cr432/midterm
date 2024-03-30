@@ -1,6 +1,7 @@
 # main.py
 from decimal import Decimal, InvalidOperation
 from calculator import Calculator
+from calculator import Calculations
 from plugins.plugin_interface import CommandPlugin
 from plugins.menu_plugin import MenuPlugin  # Importing MenuPlugin
 from importlib import import_module
@@ -40,9 +41,13 @@ def main():
             break
 
         if command == 'menu':
-            # Use MenuPlugin to display menu options
             MenuPlugin().execute(None, None)
-            continue  # Skip the rest of the loop and start over
+            continue
+
+        if command == 'save':
+            file_path = input("Enter file path to save history (e.g., history.csv): ")
+            Calculations.save_history_to_csv(file_path)
+            continue
 
         if command in ['add', 'subtract', 'multiply', 'divide']:
             a = input("Enter first number: ")
