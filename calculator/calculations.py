@@ -1,5 +1,4 @@
 # calculations.py
-import pandas as pd
 from typing import List
 import csv
 
